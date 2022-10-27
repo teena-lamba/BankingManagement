@@ -30,10 +30,10 @@ public class UserController {
         try {
             return ResponseEntity.ok(new Response(Constants.SUCCESS, userService.createUser(user)));
         } catch (BadRequestException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response());
         } catch (Exception e) {
             logger.error("error produced during creating user : {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response());
         }
     }
 
@@ -51,10 +51,10 @@ public class UserController {
         try {
             return ResponseEntity.ok(new Response(Constants.SUCCESS, userService.updateUser(user)));
         } catch (BadRequestException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response());
         } catch (Exception e) {
             logger.info("error produced during updating user : {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response());
         }
     }
 }

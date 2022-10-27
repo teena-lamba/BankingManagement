@@ -46,12 +46,12 @@ public class AccountController {
     @PostMapping("/transfer")
     public ResponseEntity<Response> transferMoney(@RequestBody TransferMoneyDto transferMoneyDto, HttpServletRequest request) {
         try {
-            return ResponseEntity.ok(new Response(Constants.SUCCESS, transactionService.transferMoney(transferMoneyDto, request.getHeader("token"))));
+            return ResponseEntity.ok(new Response());
         } catch (BadRequestException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response());
         } catch (Exception e) {
             logger.error("error produced during transfer money : {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response(Constants.ERROR, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response());
         }
     }
 
