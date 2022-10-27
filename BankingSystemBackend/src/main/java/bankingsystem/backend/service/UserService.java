@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -38,6 +40,14 @@ public class UserService {
         user.setPin(encoder.encode(user.getPin()));
         Date now = new Date();
         user.setAge(getAgeBetween(user.getDob(), now));
+        List<User> usersAll = userRepository.findAll();
+        int id = 1;
+
+        user.setId(id);
+        if(usersAll!=null) {
+        	User max = usersAll.stream().max(Comparator.comparing(User::getId)).get();
+        	user.setId(max.getId()+1);
+        }
         user = userRepository.save(user);
         return accountService.createAccount(user);
     }
